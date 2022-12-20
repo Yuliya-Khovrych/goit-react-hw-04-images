@@ -20,30 +20,30 @@ export const App = () => {
     if (searchQuery) {
       getImages();
     }
-  }, [searchQuery, page]);
 
-  async function getImages() {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const { hits } = await fetchImages(searchQuery, page);
-      console.log(hits);
-      console.log(hits.length);
+    async function getImages() {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const { hits } = await fetchImages(searchQuery, page);
+        console.log(hits);
+        console.log(hits.length);
 
-      if (hits.length > 0) {
-        setImages(prevImages => [...prevImages, ...hits]);
-      } else {
+        if (hits.length > 0) {
+          setImages(prevImages => [...prevImages, ...hits]);
+        } else {
+          setIsLoading(false);
+          return toast.error(
+            'Sorry, there are no images matching your search query. Please try again.'
+          );
+        }
+      } catch {
+        toast.error('We`re sorry, something went wrong!');
+      } finally {
         setIsLoading(false);
-        return toast.error(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
       }
-    } catch {
-      toast.error('We`re sorry, something went wrong!');
-    } finally {
-      setIsLoading(false);
     }
-  }
+  }, [searchQuery, page]);
 
   const handleFormSubmit = searchQuery => {
     if (searchQuery !== setSearchQuery) {
