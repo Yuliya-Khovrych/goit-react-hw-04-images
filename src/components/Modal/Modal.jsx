@@ -13,7 +13,7 @@ export const Modal = ({ largeImageURL, tags, onClose }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  });
+  }, [onClose]);;
 
   const handleBackdropClick = evt => {
     if (evt.currentTarget === evt.target) {
