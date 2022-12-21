@@ -45,11 +45,13 @@ export const App = () => {
     }
   }, [searchQuery, page]);
 
-  const handleFormSubmit = searchQuery => {
-    if (searchQuery !== setSearchQuery) {
+  const handleFormSubmit = query => {
+    // console.log(searchQuery);
+    // console.log(query);
+    if (searchQuery !== query) {
       setImages([]);
       setPage(1);
-      setSearchQuery(searchQuery);
+      setSearchQuery(query);
       setError(null);
     }
   };
